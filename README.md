@@ -7,9 +7,9 @@ A **Model Context Protocol (MCP)** Client implementation governed by the **NANDA
 ## About the Code
 
 - **enforce_nanda.py**: Main entrypoint.  
-  - Initializes the `MCPClient`, enforces NCP policies via `PolicyManager`, connects to an MCP server over SSE, and enters an interactive REPL for user queries.  
-  - Routes natural-language queries through an LLM (Anthropic Claude) and, when appropriate, invokes registered tools (`get_recipe`, `get_nutrition`, etc.).  
-
+  - Initializes the `MCPClient`, enforces NCP policies via `PolicyManager`, connects to an MCP server over SSE, and enters an interactive concole based interface for user queries.  
+  - Routes natural-language queries through an LLM (Anthropic Claude) and, when appropriate, invokes registered tools (`get_recipe`, `get_nutrition`, etc.). This example uses API Ninja for the examples.
+  
 - **nandaPolicy.py**: Policy engine.  
   - Loads `policy.json` to retrieve organizational rules (e.g., `verified`, `provider`, `relevance_score`, `uptime`).  
   - Discovers candidate MCP endpoints via the NANDA registry API, matches them against policy qualifiers, caches verified endpoints to `cached_mcp_servers.json`, and falls back to cache on registry failure.  
@@ -17,6 +17,15 @@ A **Model Context Protocol (MCP)** Client implementation governed by the **NANDA
 - **cached_mcp_servers.json**: Local cache of verified MCP endpoints, refreshed every 72 hours.
 
 - **requirements.txt**: Lists all Python dependencies (e.g., `mcp`, `anthropic`, `python-dotenv`, etc.).
+
+---
+
+## About the MCP Server
+
+The MCP Server is hosted at https://nutrition-mcp-server.axonvertex.xyz/
+
+The MCP server is registered at NANDA Registry : https://ui.nanda-registry.com/servers/e191684b-b0c3-4920-aa4c-f56de6a20684
+
 
 ---
 
@@ -50,50 +59,52 @@ The `PolicyManager` class reads these settings to:
 ### Installation
 
 1. **Clone the repository**:
-   ```bash
-git clone https://github.com/your-org/mcp-client.git
-cd mcp-client
-```
+
+        git clone https://github.com/BlindRusty/ncp_policy_client_app.git
+        
+        cd mcp-client
 
 2. **Create and activate a virtual environment**:
-   ```bash
-python3 -m venv venv
-source venv/bin/activate    # Linux/macOS
-# or
-venv\Scripts\activate     # Windows
-```
+   
+        python3 -m venv venv
+        source venv/bin/activate    # Linux/macOS
+        # or
+        venv\Scripts\activate     # Windows
+
 
 3. **Install dependencies**:
-   ```bash
-pip install -r requirements.txt  # citeturn1file0
-```
+   
+        pip install -r requirements.txt  
+
 
 4. **Configure environment variables**:
-   ```bash
-cp .env.example .env
-# Edit .env:
-#   POLICY_ENFORCEMENT_STATUS=true
-#   ANTHROPIC_API_KEY=<your_claude_key>
-```
+   
+        nano .env
+
+    
+        # Edit .env:
+        #   POLICY_ENFORCEMENT_STATUS=True
+        #   ANTHROPIC_API_KEY=<your_claude_key>
+
 
 ### Running the Client
 
 Launch the MCP Client to discover and connect to a verifiable MCP server:
 
-```bash
-python enforce_nanda.py [https://optional-mcp-server]
-```
+
+        python enforce_nanda.py [https://optional-mcp-server]
+
 
 - **Without argument**: Discovers an endpoint via NCP policy.  
 - **With URL**: Overrides discovery and connects directly to the provided MCP server.
 
 On startup, you will see policy directory prints, trust-verification messages, and a list of available tools. Then enter your queries:
 
-```
-Query: Find me a vegan pasta recipe
-...response with recipe and nutritional facts...
-Query: bye
-```
+
+        Query: Find me a vegan pasta recipe
+        ...response with recipe and nutritional facts...
+        Query: bye
+
 
 ---
 
