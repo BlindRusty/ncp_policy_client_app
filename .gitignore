@@ -1,0 +1,33 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+venv/
+sandbox/
+.env
+.env.*
+
+# Local cache and artifacts
+#cached_mcp_servers.json
+
+# IDE / Editor folders
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Python tooling
+cover/
+htmlcov/
+dist/
+build/
+*.egg-info/

@@ -27,6 +27,11 @@ The MCP Server is hosted at https://nutrition-mcp-server.axonvertex.xyz/
 The MCP server is registered at NANDA Registry : https://ui.nanda-registry.com/servers/e191684b-b0c3-4920-aa4c-f56de6a20684
 
 
+API Provider for nutrition and recipes : API - Ninjas - https://api-ninjas.com/
+
+For testing, a Free API key is already provided from the MCP server. One can use it with limited information to check the functionality of the MCP server and client in the NCP driven environment. 
+    
+
 ---
 
 ## About the Policy
@@ -74,7 +79,11 @@ The `PolicyManager` class reads these settings to:
 
 3. **Install dependencies**:
    
+    
         pip install -r requirements.txt  
+
+    
+    [ uv  openai  ollama ] are mentioned for further enhancing this client to interact via llama and openAI models. 
 
 
 4. **Configure environment variables**:
@@ -92,17 +101,17 @@ The `PolicyManager` class reads these settings to:
 Launch the MCP Client to discover and connect to a verifiable MCP server:
 
 
-        python enforce_nanda.py [https://optional-mcp-server]
+        python enforce_nanda.py
 
 
-- **Without argument**: Discovers an endpoint via NCP policy.  
-- **With URL**: Overrides discovery and connects directly to the provided MCP server.
+Discovers an endpoint via NCP policy.  
+
 
 On startup, you will see policy directory prints, trust-verification messages, and a list of available tools. Then enter your queries:
 
 
-        Query: Find me a vegan pasta recipe
-        ...response with recipe and nutritional facts...
+        Query: What is the nutritional value of banana?
+        ...response with nutritional facts from tools for this mcp server...
         Query: bye
 
 
