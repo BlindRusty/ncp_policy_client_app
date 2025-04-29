@@ -1,0 +1,34 @@
+{
+    "protocol_cluster" : "agents", 
+    "protocol_level" : "mcp",
+    "policy_cluster" : "verified-tools",
+    "mcp_registry" : "https://ui.nanda-registry.com/explorer", 
+    "registry_discovery_end_point" : "https://nanda-registry.com/api/v1/discovery/search/?",
+    "cache_mcp_servers_policy" : true,
+    "qualifiers_metrics":
+        [
+            {
+                "name":"verified",
+                "value":true,
+                "need":"mandatory"
+            },
+            {
+                "name":"provider",
+                "value":["KRISHNENDU DASGUPTA"],
+                "need":"mandatory"
+            },
+            {
+                "name":"relevance_score",
+                "value":0.5,
+                "need":"mandatory"
+            },
+            {
+                "name":"uptime",
+                "value":40,
+                "need":"mandatory"
+            }
+        ],
+    "policy_tags" : ["Trust","Secure","Verifiable"]
+
+}
+

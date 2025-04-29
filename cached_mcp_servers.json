@@ -1,0 +1,49 @@
+{
+    "cached_mcp": 
+    [
+        {
+            "mcp_endpoint": "https://nutrition-mcp-server.axonvertex.xyz/",
+            "met_protocol_criteria": true,
+            "last_cached": "25.04.2025 14:32:36",
+            "criteria": 
+            {
+                "limit": 3,
+                "q": "recipe",
+                "tags": "nutrition",
+                "type": "tool",
+                "verified": "true"
+            },
+            "data_item": 
+            {
+                "id": "e191684b-b0c3-4920-aa4c-f56de6a20684",
+                "name": "Nutrition and Recipe Assistant",
+                "slug": "nutrition-recipe-assistant",
+                "description": "A demonstration of MCP (Model Context Protocol) server & client pair for fetching nutrition facts and recipes.",
+                "provider": "KRISHNENDU DASGUPTA",
+                "types": 
+                [
+                    "tool"
+                ],
+                "tags": 
+                [
+                    "nutrition",
+                    "food",
+                    "recipe"
+                ],
+                "verified": true,
+                "created_at": "2025-04-17T22:21:53.907304Z",
+                "updated_at": "2025-04-24T04:00:00.215381Z",
+                "logo_url": "http://nanda-registry.com/media/server_logos/MCP_NR.png",
+                "rating": 5.0,
+                "uptime": 66.66666666666666,
+                "url": "https://nutrition-mcp-server.axonvertex.xyz/",
+                "documentation_url": "https://nutrition-mcp-server.axonvertex.xyz/docs",
+                "relevance_score": 0.6754746,
+                "highlight": 
+                {
+                    "description": "...er & client pair for fetching nutrition facts and recipes...."
+                }
+            }
+        }
+    ]
+}

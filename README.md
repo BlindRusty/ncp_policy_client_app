@@ -1,0 +1,102 @@
+# MCP Client
+
+A **Model Context Protocol (MCP)** Client implementation governed by the **NANDA Control Protocol (NCP)**. This project demonstrates how to discover, verify, cache, and interact with AI-agent servers (MCPs) in a secure, reliable, and policy-driven manner.
+
+---
+
+## About the Code
+
+- **enforce_nanda.py**: Main entrypoint.  
+  - Initializes the `MCPClient`, enforces NCP policies via `PolicyManager`, connects to an MCP server over SSE, and enters an interactive REPL for user queries.  
+  - Routes natural-language queries through an LLM (Anthropic Claude) and, when appropriate, invokes registered tools (`get_recipe`, `get_nutrition`, etc.).  
+
+- **nandaPolicy.py**: Policy engine.  
+  - Loads `policy.json` to retrieve organizational rules (e.g., `verified`, `provider`, `relevance_score`, `uptime`).  
+  - Discovers candidate MCP endpoints via the NANDA registry API, matches them against policy qualifiers, caches verified endpoints to `cached_mcp_servers.json`, and falls back to cache on registry failure.  
+
+- **cached_mcp_servers.json**: Local cache of verified MCP endpoints, refreshed every 72 hours.
+
+- **requirements.txt**: Lists all Python dependencies (e.g., `mcp`, `anthropic`, `python-dotenv`, etc.).
+
+---
+
+## About the Policy
+
+Policies are declared in **policy.json**. Key fields:
+
+- `registry_discovery_end_point`: URL for registry queries.  
+- `cache_mcp_servers_policy` (boolean): Enable or disable local caching.  
+- `qualifiers_metrics`: Array of objects `{ name, value, need }`:  
+  - **name**: Metadata attribute (e.g., `verified`, `provider`).  
+  - **value**: Threshold or list of acceptable values.  
+  - **need**: `mandatory` or `optional`, dictating enforcement strictness.  
+- `policy_tags`: Human-readable tags summarizing policy goals (e.g., `Trust`, `Secure`, `Verifiable`).  
+
+The `PolicyManager` class reads these settings to:
+1. Query the NANDA Registry for MCPs matching basic criteria.  
+2. Filter results to enforce each qualifier metric.  
+3. Cache passing endpoints locally for resilience.  
+4. Fall back to cached entries when live discovery fails.  
+
+---
+
+## Setup & Usage
+
+### Prerequisites
+
+- Python 3.8+  
+- An **Anthropic Claude** API key (set `ANTHROPIC_API_KEY` in `.env`).
+
+### Installation
+
+1. **Clone the repository**:
+   ```bash
+git clone https://github.com/your-org/mcp-client.git
+cd mcp-client
+```
+
+2. **Create and activate a virtual environment**:
+   ```bash
+python3 -m venv venv
+source venv/bin/activate    # Linux/macOS
+# or
+venv\Scripts\activate     # Windows
+```
+
+3. **Install dependencies**:
+   ```bash
+pip install -r requirements.txt  # citeturn1file0
+```
+
+4. **Configure environment variables**:
+   ```bash
+cp .env.example .env
+# Edit .env:
+#   POLICY_ENFORCEMENT_STATUS=true
+#   ANTHROPIC_API_KEY=<your_claude_key>
+```
+
+### Running the Client
+
+Launch the MCP Client to discover and connect to a verifiable MCP server:
+
+```bash
+python enforce_nanda.py [https://optional-mcp-server]
+```
+
+- **Without argument**: Discovers an endpoint via NCP policy.  
+- **With URL**: Overrides discovery and connects directly to the provided MCP server.
+
+On startup, you will see policy directory prints, trust-verification messages, and a list of available tools. Then enter your queries:
+
+```
+Query: Find me a vegan pasta recipe
+...response with recipe and nutritional facts...
+Query: bye
+```
+
+---
+
+## License
+
+Released under the [MIT License](LICENSE).
