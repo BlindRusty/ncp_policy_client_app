@@ -71,7 +71,7 @@ The `PolicyManager` class reads these settings to:
 
 2. **Create and activate a virtual environment**:
    
-        python3 -m venv venv
+        python -m venv venv
         source venv/bin/activate    # Linux/macOS
         # or
         venv\Scripts\activate     # Windows
