@@ -67,7 +67,7 @@ The `PolicyManager` class reads these settings to:
 
         git clone https://github.com/BlindRusty/ncp_policy_client_app.git
         
-        cd mcp-client
+        cd ncp_policy_client_app
 
 2. **Create and activate a virtual environment**:
    
@@ -75,6 +75,7 @@ The `PolicyManager` class reads these settings to:
         source venv/bin/activate    # Linux/macOS
         # or
         venv\Scripts\activate     # Windows
+
 
 
 3. **Install dependencies**:
